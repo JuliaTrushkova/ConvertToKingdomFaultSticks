@@ -26,19 +26,20 @@ namespace ConvertToKingdomFaultSticks
             NumberOfStick = number;
         }
 
-        public static FaultStick CreateNewFaultStick(string[] line, int numberOfStick)
+        public static FaultStick CreateNewFaultStick(string[] line, int numberOfStick, FilePattern filePattern)
         {
-            FaultStick faultStick = new FaultStick(numberOfStick);
-
-            faultStick.NameOfProfile = line[3];
-            faultStick.FaultStickPoints.Add(FaultStickPoint.CreateNewFaultStickPoint(line));  
+            FaultStick faultStick = new FaultStick(numberOfStick)
+            {
+                NameOfProfile = line[filePattern.ColumnNameOfProfile]
+            };
+            faultStick.FaultStickPoints.Add(FaultStickPoint.CreateNewFaultStickPoint(line, filePattern));  
             
             return faultStick;
         }
 
-        public void AddFaultStickPoint(string[] line)
+        public void AddFaultStickPoint(string[] line, FilePattern filePattern)
         {
-            FaultStickPoint faultStickPoint = FaultStickPoint.CreateNewFaultStickPoint(line);
+            FaultStickPoint faultStickPoint = FaultStickPoint.CreateNewFaultStickPoint(line, filePattern);
             this.FaultStickPoints.Add(faultStickPoint);
         }
 

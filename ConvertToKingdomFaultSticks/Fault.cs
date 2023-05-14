@@ -23,23 +23,23 @@ namespace ConvertToKingdomFaultSticks
             Name = name;
         }
 
-        public static Fault CreateNewFault(string[]? line)
+        public static Fault CreateNewFault(string[]? line, FilePattern filePattern)
         {
             if (line is null) throw new ArgumentNullException(nameof(line));
 
             int numberOfFirstStick = 1;
-            FaultStick faultStick = FaultStick.CreateNewFaultStick(line, numberOfFirstStick);
+            FaultStick faultStick = FaultStick.CreateNewFaultStick(line, numberOfFirstStick, filePattern);
             Fault fault = new Fault();
-            fault.Name = line[0];  
+            fault.Name = line[filePattern.ColumnNameOfFault];  
             fault.FaultSticks.Add(faultStick);
             return fault;
         }
 
-        public void AddNewFaultStick(string[]? line, int numberOfStick)
+        public void AddNewFaultStick(string[]? line, int numberOfStick, FilePattern filePattern)
         {
             if (line is null) throw new ArgumentNullException(nameof(line));
 
-            FaultStick faultStick = FaultStick.CreateNewFaultStick(line, numberOfStick);
+            FaultStick faultStick = FaultStick.CreateNewFaultStick(line, numberOfStick, filePattern);
             this.FaultSticks.Add(faultStick);
         }
 

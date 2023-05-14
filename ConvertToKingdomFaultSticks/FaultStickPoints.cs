@@ -13,14 +13,14 @@ namespace ConvertToKingdomFaultSticks
         public string Cdp { get; set; }
         public string Time { get; set; }
 
-        public static FaultStickPoint CreateNewFaultStickPoint(string[] line)
+        public static FaultStickPoint CreateNewFaultStickPoint(string[] line, FilePattern filePattern)
         {
             FaultStickPoint faultStickPoint = new FaultStickPoint()
             { 
-                X = line[4],
-                Y = line[5],
-                Cdp = line[2],
-                Time = line[8],
+                X = line[filePattern.ColumnX],
+                Y = line[filePattern.ColumnY],
+                Cdp = line[filePattern.ColumnCdp],
+                Time = line[filePattern.ColumnTime]
             };
             return faultStickPoint;
         }
